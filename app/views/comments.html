@@ -1,0 +1,126 @@
+
+
+<div class="alert alert-success" role="alert">
+    <time></time>
+</div>
+
+<ol class="breadcrumb">
+    <li><a href="#/">Articles</a></li>
+    <li class="active">{{post.name}}</li>
+</ol> 
+
+
+
+<!-- <div class="panel-body"> -->
+
+<div ng-hide="loading">
+
+<ng-tabs>  
+
+    <ng-tab title="Article">
+        <h1>{{post.name}}</h1>
+
+        <p>{{post.content}}</p>
+
+        <p><a href="#" ng-click="showEditPost()">Editer</a></p>
+
+    </ng-tab>
+
+    <ng-tab title="{{post.comments.length}} Commentaires">
+        <h3>{{post.comments.length}} Commentaires</h3>
+        <!-- comments list  -->
+        <div ng-repeat="comment in post.comments | filter:{content:query2} | filter:{username:query1} | orderBy: myOrders">
+            <ng-comment comment="comment"></ng-comment>
+        </div>
+    </ng-tab>
+
+</ng-tabs>
+
+
+<!-- edit post  -->
+<!-- <form ng-show = "post.id" ng-submit="editPost()">
+        <h1>Modifier article {{post.name}}</h1>
+    <div class="form-group">
+        <input class="form-control" text="text" placeholder="username" ng-model="post.name"/>
+    </div>
+    <div class="form-group">
+        <textarea ng-model="post.content"></textarea>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">envoyer</button>
+    </div>  
+<form/> -->
+
+<!-- add new post -->
+ <!-- <form ng-hide = "post.id" ng-submit="newPost()">
+    <h1>ajouter nouvel article</h1>
+    <div class="form-group">
+        <input class="form-control" text="text" placeholder="username" ng-model="Npost.name"/>
+    </div>
+    <div class="form-group">
+        <textarea ng-model="Npost.content"></textarea>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">envoyer</button>
+    </div>  
+<form/>  -->
+
+<!-- test direrctive transclude -->
+<div ng-test username="newComment.username">
+    test transclude
+</div>
+
+<!-- add comments -->
+<form ng-submit="addComment()">
+    <h3>Ajouter un commentaire</h3>
+    <div class="form-group">
+        <input class="form-control" text="text" placeholder="username" ng-model="newComment.username"/>
+    </div>
+    <div class="form-group">
+        <input class="form-control" text="text" placeholder="city" ng-model="newComment.city"/>
+    </div>
+    <div class="form-group">
+        <input class="form-control" text="text" placeholder="email" ng-model="newComment.email"/>
+    </div>                    
+    <!-- eg test datepicker -->
+    <div class="form-group">
+        <input class="form-control datepicker" datepicker-options="{today:'Aujourdhui'}" text="text" placeholder="date" ng-model="date"/>
+    </div>
+    <div class="form-group">
+        <textarea ng-model="newComment.content"></textarea>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="envoyer"/>
+    </div>
+
+    <form/>
+
+</div>
+
+<!-- </div> -->
+
+<!-- <div class="col-lg-8 col-md-8 col-sm-8 col-xs-8"> -->
+<!-- <div class="panel panel-info container spacer"> -->
+
+        <!-- <div class="panel-heading">
+            <div class="form-group">
+                <label> filtre username </label>
+                <input ng-model="query1" type="text" />
+            </div>
+            <div class="form-group">
+                <label> filtre content </label>
+                <input ng-model="query2" type="text" />
+            </div>
+            <div class="form-group">
+                <label> Select Order by </label>
+                <select ng-model="myOrders">
+                    <option value="username">nom</option>
+                    <option value="content">content</option>
+                    <option value="+username"> nom + </option>
+                    <option value="-username"> nom - </option>
+                </select>
+            </div>
+        </div> -->
+
+<!-- </div> -->
+<!-- </div> -->
