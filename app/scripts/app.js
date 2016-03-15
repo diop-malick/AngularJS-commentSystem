@@ -15,7 +15,7 @@ var myApp = angular.module('tutoGrafikartPostCommentApp', [
     'ngRoute',
     'ngSanitize',
     'ngTouch'
-  ]);
+]);
 
 // route config
 myApp.config(['$routeProvider', function($routeProvider) {
@@ -29,8 +29,8 @@ myApp.config(['$routeProvider', function($routeProvider) {
             controller: 'CommentsCtrl'
         })
         .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl'
+            templateUrl: 'views/about.html',
+            controller: 'AboutCtrl'
         })
         .otherwise({
             redirectTo: '/'
