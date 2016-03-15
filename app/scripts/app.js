@@ -9,13 +9,19 @@
  * Main module of the application.
  */
 var myApp = angular.module('tutoGrafikartPostCommentApp', [
-    'ngAnimate',
-    'ngCookies',
+    // 'ngAnimate',
+    // 'ngCookies',
+    // 'ngSanitize',
+    // 'ngTouch',
     'ngResource',
     'ngRoute',
-    'ngSanitize',
-    'ngTouch'
+    'angular-toArrayFilter'
 ]);
+
+myApp.config(['$resourceProvider', function($resourceProvider) {
+    // Don't strip trailing slashes from calculated URLs
+    $resourceProvider.defaults.stripTrailingSlashes = false;
+}]);
 
 // route config
 myApp.config(['$routeProvider', function($routeProvider) {

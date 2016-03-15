@@ -1,58 +1,101 @@
 // retoune un objet qui sera passé au controller
-myApp.factory('PostFactory', function($http, $q, $timeout) {
+//Post service used for car REST endpoint jsonplacehoder
+myApp.factory('PostFactory', function($http, $q, $timeout, $resource) {
+
+
+    var host = 'http://jsonplaceholder.typicode.com';
+
 
     var factory = {
-	
+
         posts: false, // false pour pas de cache
-		
-        findAll: function() {
 
-			var deferred = $q.defer(); // initialise une tache 
-			
-			// pour éviter les nombreux rehargment du json, recupère la cache
-			if (factory.posts !== false) {
-				deferred.resolve(factory.posts);
-			} else {
-				$http.get('posts.json')
-					.success(function(data, status) {
-						factory.posts = data;
-						deferred.resolve(factory.posts);
-
-                        // $timeout(function(){
-							// deferred.resolve(factory.posts);
-						// }, 2000)						
-					})
-					.error(function(data, status) {
-						deferred.reject('Impossible de récupérer les donnéesé');
-					});
-			}		
-            return deferred.promise; // returne la promesse
-
-			// q : faire des promesse, excécuter des function dans le future
-			// timeout, marquer un temps d'arrer avant d'exécuter une 
+        post: function() {
+            var path = host + '/posts/:id';
+            return $resource(path, {}, {
+                'query': {
+                    method: 'GET',
+                    isArray: true
+                },
+                'GET': {
+                    method: 'GET'
+                }
+                // ,
+                // 'update': {
+                //     method: 'PUT'
+                // }
+                // implicite method : sget / ave / delete
+                // possible to rename verb method
+                // { postId: '@id'}  : ajoute  un param
+            });
         },
-		
-        findOne: function(id) {
 
+        comment: function() {
+            var path = host + '/posts/:id/comments';
+            return $resource(path, {
+                'query': {
+                    method: 'GET',
+                    isArray: false
+                }
+            });
+        },
+
+        // deprecated 
+        /*
+        findAll: function() {
+            var deferred = $q.defer(); // initialise une tache 
+            // pour éviter les nombreux rehargment du json, recupère la cache
+            if (factory.posts !== false) {
+                deferred.resolve(factory.posts);
+            } else {
+                $http.get('posts.json')
+                    .success(function(data, status) {
+                        factory.posts = data;
+                        deferred.resolve(factory.posts);
+                    })
+                    .error(function(data, status) {
+                        deferred.reject('Impossible de récupérer les donnéesé');
+                    });
+            }
+            return deferred.promise; // returne la promesse
+        },
+
+        findOne: function(id) {
             var deferred = $q.defer();
             var post = {};
-			var posts = factory.findAll().then(function(posts){
-				angular.forEach(posts, function(value, key) {
+            var posts = factory.findAll().then(function(posts) {
+                angular.forEach(posts, function(value, key) {
                     if (value.id == id) {
                         post = value;
                     }
-				});
-				deferred.resolve(post); // je renvoi l'article une fois bien recupéré
-			}, function(msg) { 
-				deferred.reject(msg);
-			});
+                });
+                deferred.resolve(post); // je renvoi l'article une fois bien recupéré
+            }, function(msg) {
+                deferred.reject(msg);
+            });
             return deferred.promise;
             // return post;
             // return factory.posts[0];
         },
+        */
+
+        postComments: function(id) {
+            var path = '/posts/' + id + '/comments';
+            // var path =  '/comments?postId='+ id ;
+            // $resource(host + path, {postId: id, xx:yy}, {});
+            return $resource(host + path, {}, {
+                query: {
+                    method: 'GET',
+                    isArray: true
+                },
+                create: {
+                    method: 'POST'
+                }
+            });
+        },
 
 
-        save : function(comment) {
+        save: function(comment) {
 
             var deferred = $q.defer();
             // ....
@@ -71,8 +114,8 @@ myApp.factory('PostFactory', function($http, $q, $timeout) {
 /*
 myApp.service('PostService', function() {
 
-	$this = this; // obget courant
-	
+    $this = this; // obget courant
+    
         $this.posts = [{
             "id": 0,
             "name": "Velity",
@@ -134,12 +177,12 @@ myApp.service('PostService', function() {
                 "content": "Sunt mollit reprehenderit elit ad labore mollit dolore nulla duis."
             }]
         }];
-		
+        
         $this.getPosts = function() {
             return $this.posts;
         },
         
-		$this.getPost = function(id) {
+        $this.getPost = function(id) {
             var post = {};
             angular.forEach($this.posts, function(value, key) {
                 if (value.id == id) {
