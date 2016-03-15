@@ -26,17 +26,13 @@ myApp.controller('CommentsCtrl', ['$scope', '$rootScope', '$resource', '$routePa
     });
 
 
+    // persist new comment on server via api 
     $scope.addComment = function() {
-        // $scope.comments.push($scope.newComment);
-
-        // // persist on server
-        // PostFactory.save($scope.newComment).then(function() {
-
-        // }, function() {
-        //     alert("VOTRE message n'a pas pu etre saubvegardé");
-        // });
-
-        // $scope.newComment = {};
+        var comment = PostFactory.post().save($scope.newComment).then(function() {
+            $scope.comments.push($scope.newComment);
+        }, function() {
+            alert("VOTRE message n'a pas pu etre saubvegardé");
+        });
     }
 
 

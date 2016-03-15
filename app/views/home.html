@@ -5,8 +5,20 @@
         <input type="test" placeholder="Tiltre du post" ng-model="searchquery.title"></input>
         <input type="test" placeholder="Contenu du Post" ng-model="searchquery.body"></input>
     </p>
+    <!--     <div class="panel panel-info container spacer">
+        <div class="panel-heading">           
+                <label> Select Order by </label>
+				<select class="form-control" ng-model="myOrders">
+				    <option value="title">nom</option>
+				    <option value="body">content</option>
+				    <option value="+title"> nom + </option>
+				    <option value="-title"> nom - </option>
+				</select>
+        </div>
+    </div> -->
     <!-- liste poste -->
     <div ng-repeat="post in posts | filter:searchquery" class="col-sm-3">
+        <!-- | filter:{body:query2} | filter:{email:query1} | orderBy: myOrders -->
         <h1>{{post.title | limitTo:titleLetterLimit}}</h1>
         <button type="button" class="navbar-toggle">
             <span class="icon-bar"></span>

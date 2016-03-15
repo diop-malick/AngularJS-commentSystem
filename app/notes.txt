@@ -24,14 +24,13 @@ Les Services
 Les promesses
 Créer ses directives
 Les filtres
-
-* Les ressources 
-
+Les ressources 
 Les elements : $Apply $watch, $digest
+
 
 =========== todo
 
-
+use RestAngular
 
 PROMESSES , $Q ????
 

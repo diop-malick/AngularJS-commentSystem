@@ -19,12 +19,11 @@ myApp.factory('PostFactory', function($http, $q, $timeout, $resource) {
                 },
                 'GET': {
                     method: 'GET'
+                },
+                'update': {
+                    method: 'PUT'
                 }
-                // ,
-                // 'update': {
-                //     method: 'PUT'
-                // }
-                // implicite method : sget / ave / delete
+                // implicite method : get / ave / delete
                 // possible to rename verb method
                 // { postId: '@id'}  : ajoute  un param
             });
@@ -39,74 +38,52 @@ myApp.factory('PostFactory', function($http, $q, $timeout, $resource) {
                 }
             });
         },
-
-        // deprecated 
-        /*
-        findAll: function() {
-            var deferred = $q.defer(); // initialise une tache 
-            // pour éviter les nombreux rehargment du json, recupère la cache
-            if (factory.posts !== false) {
-                deferred.resolve(factory.posts);
-            } else {
-                $http.get('posts.json')
-                    .success(function(data, status) {
-                        factory.posts = data;
-                        deferred.resolve(factory.posts);
-                    })
-                    .error(function(data, status) {
-                        deferred.reject('Impossible de récupérer les donnéesé');
-                    });
-            }
-            return deferred.promise; // returne la promesse
-        },
-
-        findOne: function(id) {
-            var deferred = $q.defer();
-            var post = {};
-            var posts = factory.findAll().then(function(posts) {
-                angular.forEach(posts, function(value, key) {
-                    if (value.id == id) {
-                        post = value;
-                    }
-                });
-                deferred.resolve(post); // je renvoi l'article une fois bien recupéré
-            }, function(msg) {
-                deferred.reject(msg);
-            });
-            return deferred.promise;
-            // return post;
-            // return factory.posts[0];
-        },
-        */
-
-        postComments: function(id) {
-            var path = '/posts/' + id + '/comments';
-            // var path =  '/comments?postId='+ id ;
-            // $resource(host + path, {postId: id, xx:yy}, {});
-            return $resource(host + path, {}, {
-                query: {
-                    method: 'GET',
-                    isArray: true
-                },
-                create: {
-                    method: 'POST'
-                }
-            });
-        },
-
-
-        save: function(comment) {
-
-            var deferred = $q.defer();
-            // ....
-            deferred.resolve();
-            return deferred.promise;
-
-        }
     }
     return factory
 
 });
+
+
+// deprecated 
+/*
+findAll: function() {
+    var deferred = $q.defer(); // initialise une tache 
+    // pour éviter les nombreux rehargment du json, recupère la cache
+    if (factory.posts !== false) {
+        deferred.resolve(factory.posts);
+    } else {
+        $http.get('posts.json')
+            .success(function(data, status) {
+                factory.posts = data;
+                deferred.resolve(factory.posts);
+            })
+            .error(function(data, status) {
+                deferred.reject('Impossible de récupérer les donnéesé');
+            });
+    }
+    return deferred.promise; // returne la promesse
+},
+
+findOne: function(id) {
+    var deferred = $q.defer();
+    var post = {};
+    var posts = factory.findAll().then(function(posts) {
+        angular.forEach(posts, function(value, key) {
+            if (value.id == id) {
+                post = value;
+            }
+        });
+        deferred.resolve(post); // je renvoi l'article une fois bien recupéré
+    }, function(msg) {
+        deferred.reject(msg);
+    });
+    return deferred.promise;
+    // return post;
+    // return factory.posts[0];
+},
+*/
+
+
 
 
 
