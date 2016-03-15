@@ -1,19 +1,9 @@
 
-install with node 
-
-bower install pickadate
-
-=============== formation angular grafikart 
+formation angular grafikart 
 
 https://www.grafikart.fr/formations/angularjs
 
-for Json data : rest API
-use 
-http://jsonplaceholder.typicode.com/
-créer des post avec mon id 
-
-enlever les ressource de controller -< transfert to serice
-========== done 
+Json data : rest API from http://jsonplaceholder.typicode.com/
 
 Introduction
 Les Directives
@@ -27,14 +17,5 @@ Les filtres
 Les ressources 
 Les elements : $Apply $watch, $digest
 
-
-=========== todo
-
-use RestAngular
-
-PROMESSES , $Q ????
-
-angular sanatize ??
-angular touch ??
 
 
